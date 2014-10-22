@@ -38,7 +38,7 @@ import org.midonet.util.BatchCollector;
 public class OvsDatapathConnectionImpl extends OvsDatapathConnection {
 
     private static final Logger log =
-        LoggerFactory.getLogger(OvsDatapathConnectionImpl.class);
+        LoggerFactory.getLogger("org.midonet.netlink.odp-conn");
 
     public OvsDatapathConnectionImpl(NetlinkChannel channel, BufferPool sendPool) {
         super(channel, sendPool);
@@ -54,10 +54,8 @@ public class OvsDatapathConnectionImpl extends OvsDatapathConnection {
                 packetFamily.contextAction.command() == cmd)) {
             if (notificationHandler != null) {
                 Packet packet = Packet.buildFrom(buffer);
-                if (packet == null) {
-                    log.info("Discarding malformed packet");
+                if (packet == null)
                     return;
-                }
 
                 if (packetFamily.contextAction.command() == cmd) {
                     packet.setReason(Packet.Reason.FlowActionUserspace);

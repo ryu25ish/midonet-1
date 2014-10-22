@@ -8,6 +8,9 @@ import java.nio.ByteOrder;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.midonet.netlink.NetlinkMessage;
 import org.midonet.netlink.AttributeHandler;
 import org.midonet.odp.OpenVSwitch.Packet.Attr;
@@ -27,6 +30,8 @@ import org.midonet.packets.Ethernet;
  * @see OvsDatapathConnection#datapathsSetNotificationHandler(Datapath, Callback)
  */
 public class Packet implements AttributeHandler {
+    private static final Logger log = LoggerFactory
+            .getLogger("org.midonet.netlink.netlink-proto");
 
     public enum Reason {
         FlowTableMiss,
@@ -142,13 +147,15 @@ public class Packet implements AttributeHandler {
         switch(NetlinkMessage.unnest(id)) {
 
             case Attr.Packet:
+                ByteOrder originalOrder = buf.order();
                 try {
-                    ByteOrder originalOrder = buf.order();
                     this.eth = new Ethernet();
                     this.eth.deserialize(buf);
-                    buf.order(originalOrder);
                 } catch (Exception e) {
+                    log.warn("Dropping malformed packet", e);
                     this.eth = null;
+                } finally {
+                    buf.order(originalOrder);
                 }
                 break;
 
