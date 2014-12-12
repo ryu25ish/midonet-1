@@ -10,8 +10,10 @@ import org.apache.curator.test.TestingServer;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.state.DirectoryVerifier;
 import org.midonet.midolman.state.PathBuilder;
+import org.midonet.midolman.state.StateAccessException;
 
 public final class NeutronZkDataTest extends NeutronPluginTest {
 
@@ -27,7 +29,24 @@ public final class NeutronZkDataTest extends NeutronPluginTest {
         dirVerifier = new DirectoryVerifier(getDirectory());
     }
 
-    private void verifyFloatingIp() {
+    private void verifyFipDnatRule(int expectedMatchCnt) {
+
+        String rulesPath = pathBuilder.getRulesPath();
+
+        String floatingIpAddr = floatingIp.floatingIpAddress;
+        String fixedIpAddr = floatingIp.fixedIpAddress;
+
+        Map<String, Object> matches = new HashMap<>();
+        matches.put("type", "ForwardNat");
+        matches.put("condition.nwDstIp.address", floatingIpAddr);
+        matches.put("natTargets[0].nwStart", fixedIpAddr);
+        matches.put("natTargets[0].nwEnd", fixedIpAddr);
+
+        dirVerifier.assertChildrenFieldsMatch(rulesPath, matches,
+                                              expectedMatchCnt);
+    }
+
+    private void verifyFipSnatRule(int expectedMatchCnt) {
 
         String rulesPath = pathBuilder.getRulesPath();
 
@@ -40,21 +59,31 @@ public final class NeutronZkDataTest extends NeutronPluginTest {
         matches.put("natTargets[0].nwStart", floatingIpAddr);
         matches.put("natTargets[0].nwEnd", floatingIpAddr);
 
-        dirVerifier.assertChildrenFieldsMatch(rulesPath, matches, 1);
+        dirVerifier.assertChildrenFieldsMatch(rulesPath, matches,
+                                              expectedMatchCnt);
+    }
 
-        matches = new HashMap<>();
-        matches.put("type", "ForwardNat");
-        matches.put("condition.nwDstIp.address", floatingIpAddr);
-        matches.put("natTargets[0].nwStart", fixedIpAddr);
-        matches.put("natTargets[0].nwEnd", fixedIpAddr);
+    private void verifyFloatingIpRules() {
 
-        dirVerifier.assertChildrenFieldsMatch(rulesPath, matches, 1);
+        verifyFipSnatRule(1);
+        verifyFipDnatRule(1);
+
+    }
+
+    public void verifyNoFloatingIpRules() {
+
+        verifyFipSnatRule(0);
+        verifyFipDnatRule(0);
     }
 
     @Test
-    public void testBasicScenario() {
+    public void testBasicScenario()
+        throws SerializationException, StateAccessException {
 
-        verifyFloatingIp();
+        verifyFloatingIpRules();
 
+        plugin.deleteNetwork(extNetwork.id);
+
+        verifyNoFloatingIpRules();
     }
 }
