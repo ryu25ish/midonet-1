@@ -34,6 +34,10 @@ import org.midonet.midolman.util.mock.{MockInterfaceScanner, MockMidolmanActors}
 import org.midonet.midolman.version.guice.VersionModule
 import org.midonet.util.MockClock
 
+
+object MidolmanSpec {
+    val TestDhcpMtu: Short = 4200
+}
 /**
  * A base trait to be used for new style Midolman simulation tests with Midolman
  * Actors.
@@ -48,6 +52,7 @@ trait MidolmanSpec extends FeatureSpecLike
         with MidolmanServices
         with VirtualTopologyHelper
         with OneInstancePerTest {
+    import MidolmanSpec._
 
     var injector: Injector = null
     var clock = new MockClock
@@ -95,6 +100,7 @@ trait MidolmanSpec extends FeatureSpecLike
             : HierarchicalConfiguration = {
         config.setProperty("midolman.midolman_root_key", "/test/v3/midolman")
         config.setProperty("cassandra.servers", "localhost:9171")
+        config.setProperty("midolman.dhcp_mtu", TestDhcpMtu)
         config
     }
 

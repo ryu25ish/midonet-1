@@ -6,6 +6,8 @@ package org.midonet.midolman
 
 import java.util.UUID
 import java.util.{HashMap => JHashMap, List => JList}
+import org.midonet.midolman.config.MidolmanConfig
+
 import scala.collection.mutable
 import scala.compat.Platform
 import scala.concurrent.duration._
@@ -129,7 +131,8 @@ class DeduplicationActor(
             val storage: FlowStateStorage,
             val natLeaser: NatLeaser,
             val metrics: PacketPipelineMetrics,
-            val packetOut: Int => Unit)
+            val packetOut: Int => Unit,
+            val config: MidolmanConfig)
             extends Actor with ActorLogWithoutPath {
 
     import DatapathController.DatapathReady
@@ -195,7 +198,8 @@ class DeduplicationActor(
                 datapath)
             pendingFlowStateBatches foreach (self ! _)
             workflow = new PacketWorkflow(dpState, datapath, clusterDataClient,
-                                          dpConnPool, actionsCache, replicator)
+                                          dpConnPool, actionsCache, replicator,
+                                          config)
 
         case m: FlowStateBatch =>
             if (replicator ne null)

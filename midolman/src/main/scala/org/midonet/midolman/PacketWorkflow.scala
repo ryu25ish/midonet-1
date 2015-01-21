@@ -5,6 +5,8 @@ package org.midonet.midolman
 
 import java.util.{List => JList}
 
+import org.midonet.midolman.config.MidolmanConfig
+
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import scala.reflect.ClassTag
@@ -66,7 +68,8 @@ class PacketWorkflow(protected val dpState: DatapathState,
                      val dataClient: DataClient,
                      val dpConnPool: DatapathConnectionPool,
                      val actionsCache: ActionsCache,
-                     val replicator: FlowStateReplicator)
+                     val replicator: FlowStateReplicator,
+                     protected val config: MidolmanConfig)
                     (implicit val system: ActorSystem)
         extends FlowTranslator with PacketHandler {
 
@@ -455,7 +458,7 @@ class PacketWorkflow(protected val dpState: DatapathState,
     private def processDhcpFuture(pktCtx: PacketContext,
                                   dhcp: DHCP): Urgent[Boolean] =
         VirtualTopologyActor.expiringAsk[Port](pktCtx.inputPort, log) map {
-            processDhcp(pktCtx, _, dhcp, DatapathController.minMtu)
+            processDhcp(pktCtx, _, dhcp, config.getDhcpMtu.toShort.min(DatapathController.minMtu))
         }
 
     private def processDhcp(pktCtx: PacketContext, inPort: Port,

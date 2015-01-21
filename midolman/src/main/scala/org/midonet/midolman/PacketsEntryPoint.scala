@@ -127,7 +127,8 @@ class PacketsEntryPoint extends Actor with ActorLogWithoutPath {
             storageFactory.create(),
             natLeaser,
             metrics,
-            counter.addAndGet(index, _: Int)).withDispatcher("actors.pinned-dispatcher")
+            counter.addAndGet(index, _: Int),
+            config).withDispatcher("actors.pinned-dispatcher")
 
         context.actorOf(props, s"PacketProcessor-$index")
     }

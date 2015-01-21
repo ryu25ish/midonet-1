@@ -4,6 +4,10 @@
 package org.midonet.midolman
 
 import java.util.UUID
+import org.apache.commons.configuration.HierarchicalConfiguration
+import org.midonet.config.ConfigProvider
+import org.midonet.midolman.config.MidolmanConfig
+
 import scala.collection.JavaConverters._
 import scala.collection.immutable
 import scala.concurrent.promise
@@ -46,6 +50,9 @@ class DeduplicationActorTestCase extends MidolmanSpec {
 
     lazy val dpConnPool = injector.getInstance(classOf[DatapathConnectionPool])
     lazy val metricsReg = injector.getInstance(classOf[MetricsRegistry])
+
+    val config = ConfigProvider.providerForIniConfig(new HierarchicalConfiguration)
+        .getConfig(classOf[MidolmanConfig])
 
     override def beforeTest() {
         datapath = mockDpConn().futures.datapathsCreate("midonet").get()
@@ -292,7 +299,7 @@ class DeduplicationActorTestCase extends MidolmanSpec {
                                        new ShardedFlowStateTable[NatKey, NatBinding](),
                                        new MockStateStorage(),
                                        HappyGoLuckyLeaser,
-                                       metrics, packetOut)
+                                       metrics, packetOut, config)
             with MessageAccumulator {
 
         implicit override val dispatcher = this.context.dispatcher

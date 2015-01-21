@@ -128,7 +128,10 @@ object DatapathController extends Referenceable {
     /** Java API */
     val initializeMsg = Initialize
 
-    val DEFAULT_MTU: Short = 1500
+    // This value is actually configured in preStart of a DatapathController
+    // instance based on the value specified in /etc/midolman/midolman.conf
+    // because we can't inject midolmanConfig into Scala's companion object.
+    var defaultMtu: Short = MidolmanConfig.DEFAULT_MTU
 
     /**
      * Message sent to the [[org.midonet.midolman.FlowController]] actor to let
@@ -196,7 +199,7 @@ object DatapathController extends Referenceable {
      *  created. */
     case class VtepPortReady_(vtep: VxLanTunnelPort)
 
-    private var cachedMinMtu: Short = DEFAULT_MTU
+    private var cachedMinMtu: Short = defaultMtu
 
     def minMtu = cachedMinMtu
 }
@@ -323,6 +326,7 @@ class DatapathController extends Actor with ActorLogWithoutPath {
     var portWatcherEnabled = true
 
     override def preStart() {
+        defaultMtu = midolmanConfig.getDhcpMtu.toShort
         super.preStart()
         storage = storageFactory.create()
         context become (DatapathInitializationActor orElse {
@@ -705,12 +709,12 @@ class DatapathController extends Actor with ActorLogWithoutPath {
               if addressesMatch(inetAddress, zone._2.getIp) &&
                  zone._2.isInstanceOf[TZHostConfig]
         } {
-            val tunnelMtu = (intf.getMtu - overhead).toShort
+            val tunnelMtu = (defaultMtu - overhead).toShort
             minMtu = minMtu.min(tunnelMtu)
         }
 
         if (minMtu == Short.MaxValue)
-            minMtu = DEFAULT_MTU
+            minMtu = defaultMtu
 
         if (cachedMinMtu != minMtu) {
             log.debug("Changing MTU from {} to {}", cachedMinMtu, minMtu)
