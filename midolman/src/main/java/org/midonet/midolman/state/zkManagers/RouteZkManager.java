@@ -449,6 +449,20 @@ public class RouteZkManager extends AbstractZkManager<UUID, Route> {
     }
 
     public void prepareRoutesDelete(List<Op> ops, UUID routerId,
+                                    final String ipAddr)
+        throws SerializationException, StateAccessException {
+
+        prepareRoutesDelete(ops, routerId,
+                            new Function<Route, Boolean>() {
+                                @Override
+                                public Boolean apply(@Nullable Route route) {
+                                    return route.getDstNetworkAddr().equals(
+                                        ipAddr);
+                                }
+                            });
+    }
+
+    public void prepareRoutesDelete(List<Op> ops, UUID routerId,
                                     Function<Route, Boolean> matcher)
             throws StateAccessException, SerializationException {
         List<UUID> routeIds = list(routerId);

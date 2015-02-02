@@ -591,6 +591,16 @@ public class PortZkManager extends AbstractZkManager<UUID, PortConfig> {
         }
     }
 
+    public void prepareUpdatePortAddress(List<Op> ops, UUID portId, int addr)
+        throws SerializationException, StateAccessException {
+
+        PortDirectory.RouterPortConfig port =
+            (PortDirectory.RouterPortConfig) get(portId);
+        port.portAddr = addr;
+        ops.add(Op.setData(paths.getPortPath(portId),
+                           serializer.serialize(port), -1));
+    }
+
     public List<Op> prepareUpdate(UUID id, PortConfig config)
             throws StateAccessException, SerializationException {
         List<Op> ops = new ArrayList<Op>();

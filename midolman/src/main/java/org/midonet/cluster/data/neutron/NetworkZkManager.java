@@ -210,6 +210,7 @@ public class NetworkZkManager extends BaseZkManager {
             // itself)
             config.setOpt121Routes(oldConfig.getOpt121Routes());
             config.setServerAddr(oldConfig.getServerAddr());
+            config.setDefaultGateway((IPv4Addr) subnet.gatewayIpAddr());
             dhcpZkManager.prepareUpdateSubnet(ops, subnet.networkId, config);
         } else if (subnet.isIpv6()) {
             BridgeDhcpV6ZkManager.Subnet6 config =
