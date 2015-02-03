@@ -12,6 +12,8 @@ import org.apache.zookeeper.*;
 
 public interface Directory {
 
+    String getPath();
+
     String add(String relativePath, byte[] data, CreateMode mode)
         throws KeeperException, InterruptedException;
 

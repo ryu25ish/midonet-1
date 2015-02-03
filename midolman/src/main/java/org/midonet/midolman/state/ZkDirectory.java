@@ -39,6 +39,11 @@ public class ZkDirectory implements Directory {
     }
 
     @Override
+    public String getPath() {
+        return basePath;
+    }
+
+    @Override
     public String toString() {
         return ("ZkDirectory: base=" + basePath);
     }
