@@ -1,5 +1,5 @@
 project.ext {
-    midonetVersion = "1.7-SNAPSHOT"
+    midonetVersion = "1.7.2-rc1"
     vendor = 'Midokura'
     maintainer = "MidoNet Team <info@midokura.com>"
     url = "http://midokura.com"
