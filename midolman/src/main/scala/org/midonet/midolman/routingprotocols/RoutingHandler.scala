@@ -102,8 +102,7 @@ class RoutingHandler(var rport: RouterPort, val bgpIdx: Int,
                      val config: MidolmanConfig,
                      val connWatcher: ZkConnectionAwareWatcher,
                      val selectLoop: SelectLoop)
-    extends UntypedActorWithStash with ActorLogWithoutPath with FlowTranslator
-                                  with DatapathReadySubscriberActor {
+    extends UntypedActorWithStash with ActorLogWithoutPath with FlowTranslator {
 
     import RoutingHandler._
     import DatapathController._
