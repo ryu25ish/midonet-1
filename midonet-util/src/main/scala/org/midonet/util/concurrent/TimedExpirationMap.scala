@@ -132,12 +132,12 @@ final class TimedExpirationMap[K, V >: Null](log: LoggingAdapter,
     def putIfAbsentAndRef(key: K, value: V): V =
         refCountMap.get(key) match {
             case m: Metadata =>
-                val value = ref(key)
-                if (value == null) {
+                val oldValue = ref(key)
+                if (oldValue != null) {
+                    oldValue
+                } else {
                     /* Retry, a deletion raced with us and won */
                     putIfAbsentAndRef(key, value)
-                } else {
-                    value
                 }
             case _ if insert(key, value) eq null => null
             case _ => putIfAbsentAndRef(key, value)
