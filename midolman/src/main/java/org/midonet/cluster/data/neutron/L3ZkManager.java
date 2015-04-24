@@ -131,7 +131,9 @@ public class L3ZkManager extends BaseZkManager {
     public void prepareDeleteRouter(List<Op> ops, UUID id)
             throws SerializationException, StateAccessException {
 
-        RouterConfig config = routerZkManager.get(id);
+        ops.add(zk.getDeleteOp(paths.getNeutronRouterPath(id)));
+
+        RouterConfig config = routerZkManager.tryGet(id);
         if (config == null)
             return;
 
@@ -149,8 +151,6 @@ public class L3ZkManager extends BaseZkManager {
                 ResourceType.ROUTER.toString(), id);
         zk.removeLastOp(ops, inRefPath);
         zk.removeLastOp(ops, outRefPath);
-
-        ops.add(zk.getDeleteOp(paths.getNeutronRouterPath(id)));
     }
 
     public void prepareUpdateRouter(List<Op> ops, Router router)
