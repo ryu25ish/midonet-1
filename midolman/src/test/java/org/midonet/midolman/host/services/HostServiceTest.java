@@ -34,6 +34,7 @@ import com.typesafe.config.ConfigValueFactory;
 import org.apache.zookeeper.CreateMode;
 import org.junit.Test;
 
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.conf.MidoTestConfigurator;
 import org.midonet.conf.HostIdGenerator;
 import org.midonet.cluster.data.storage.OwnershipType;
@@ -47,7 +48,6 @@ import org.midonet.midolman.Setup;
 import org.midonet.midolman.cluster.serialization.SerializationModule;
 import org.midonet.midolman.config.MidolmanConfig;
 import org.midonet.midolman.host.scanner.InterfaceScanner;
-import org.midonet.midolman.host.state.HostDirectory;
 import org.midonet.midolman.host.state.HostZkManager;
 import org.midonet.midolman.host.updater.DefaultInterfaceDataUpdater;
 import org.midonet.midolman.host.updater.InterfaceDataUpdater;

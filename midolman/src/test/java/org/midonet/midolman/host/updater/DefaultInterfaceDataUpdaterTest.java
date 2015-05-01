@@ -25,7 +25,6 @@ import java.util.UUID;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigValueFactory;
-import scala.collection.JavaConversions;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -35,6 +34,7 @@ import org.hamcrest.beans.HasPropertyWithValue;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.cluster.storage.MidonetBackendTestModule;
 import org.midonet.cluster.storage.StateStorageModule;
 import org.midonet.conf.MidoTestConfigurator;
@@ -49,7 +49,6 @@ import org.midonet.midolman.cluster.zookeeper.MockZookeeperConnectionModule;
 import org.midonet.midolman.guice.config.MidolmanConfigModule;
 import org.midonet.midolman.host.guice.HostModule;
 import org.midonet.midolman.host.interfaces.InterfaceDescription;
-import org.midonet.midolman.host.state.HostDirectory;
 import org.midonet.midolman.host.state.HostZkManager;
 import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.services.MidolmanActorsService;
@@ -69,7 +68,7 @@ import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
-import static org.midonet.midolman.host.state.HostDirectory.Interface;
+import static org.midonet.cluster.data.midonet.HostDirectory.Interface;
 
 
 public class DefaultInterfaceDataUpdaterTest {

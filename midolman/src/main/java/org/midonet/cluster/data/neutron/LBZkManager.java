@@ -35,7 +35,7 @@ import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.serialization.Serializer;
 import org.midonet.midolman.state.BaseZkManager;
 import org.midonet.midolman.state.PathBuilder;
-import org.midonet.midolman.state.PortDirectory.RouterPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.RouterPortConfig;
 import org.midonet.midolman.state.StateAccessException;
 import org.midonet.midolman.state.ZkManager;
 import org.midonet.midolman.state.zkManagers.HealthMonitorZkManager;

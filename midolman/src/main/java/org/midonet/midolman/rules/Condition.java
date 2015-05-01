@@ -29,7 +29,7 @@ import org.midonet.cluster.util.RangeUtil;
 import org.midonet.cluster.util.UUIDUtil;
 import org.midonet.midolman.simulation.IPAddrGroup;
 import org.midonet.midolman.simulation.PacketContext;
-import org.midonet.midolman.state.zkManagers.BaseConfig;
+import org.midonet.cluster.data.BaseConfig;
 import org.midonet.odp.FlowMatch;
 import org.midonet.packets.IPAddr;
 import org.midonet.packets.IPSubnet;

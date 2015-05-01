@@ -18,6 +18,8 @@ package org.midonet.midolman.state.zkManagers;
 import java.util.*;
 
 import com.google.common.base.Objects;
+
+import org.midonet.cluster.data.midonet.ConfigWithProperties;
 import org.midonet.cluster.data.neutron.Router;
 import org.midonet.midolman.serialization.Serializer;
 import org.midonet.midolman.serialization.SerializationException;

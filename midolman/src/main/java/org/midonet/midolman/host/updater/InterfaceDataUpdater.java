@@ -18,8 +18,8 @@ package org.midonet.midolman.host.updater;
 import java.util.Set;
 import java.util.UUID;
 
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.midolman.host.interfaces.InterfaceDescription;
-import org.midonet.midolman.host.state.HostDirectory;
 
 /**
  * Any implementation of this interface will have to update the centralized

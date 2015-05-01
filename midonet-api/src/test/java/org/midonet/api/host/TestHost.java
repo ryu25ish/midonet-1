@@ -64,7 +64,6 @@ import static org.junit.Assert.fail;
 import static org.midonet.client.VendorMediaType.APPLICATION_BRIDGE_JSON;
 import static org.midonet.client.VendorMediaType.APPLICATION_HOST_COLLECTION_JSON_V3;
 import static org.midonet.client.VendorMediaType.APPLICATION_HOST_JSON_V3;
-import static org.midonet.client.VendorMediaType.APPLICATION_INTERFACE_COLLECTION_JSON;
 import static org.midonet.client.VendorMediaType.APPLICATION_PORT_V2_JSON;
 
 public class TestHost extends JerseyTest {

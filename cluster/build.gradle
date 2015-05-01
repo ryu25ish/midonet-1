@@ -36,8 +36,7 @@ sourceSets {
 }
 
 dependencies {
-    compile project(':midonet-util')
-
+    compile project(':midonet-util'), project(':odp')
     compile libraries.cassandra,
             libraries.collections4,
             libraries.commons_cli,

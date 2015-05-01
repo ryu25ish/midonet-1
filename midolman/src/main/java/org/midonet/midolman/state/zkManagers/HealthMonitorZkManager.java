@@ -20,6 +20,7 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.Op;
 import org.apache.zookeeper.ZooDefs.Ids;
 
+import org.midonet.cluster.data.BaseConfig;
 import org.midonet.cluster.data.neutron.loadbalancer.HealthMonitor;
 import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.serialization.Serializer;

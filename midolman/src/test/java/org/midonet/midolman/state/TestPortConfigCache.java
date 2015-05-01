@@ -29,6 +29,7 @@ import org.apache.zookeeper.CreateMode;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.midonet.cluster.data.midonet.PortDirectory;
 import org.midonet.midolman.Setup;
 import org.midonet.midolman.cluster.serialization.SerializationModule;
 import org.midonet.midolman.serialization.SerializationException;

@@ -17,11 +17,9 @@ package org.midonet.cluster.data.host;
 
 import java.net.InetAddress;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.midonet.midolman.host.state.HostDirectory.Interface.Type;
 import org.midonet.cluster.data.Entity;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.odp.DpPort;
 
 
@@ -56,11 +54,11 @@ public class Interface extends Entity.Base<String, Interface.Data, Interface> {
         return self();
     }
 
-    public Type getType() {
+    public HostDirectory.Interface.Type getType() {
         return getData().type;
     }
 
-    public Interface setType(Type type) {
+    public Interface setType(HostDirectory.Interface.Type type) {
         getData().type = type;
         return self();
     }
@@ -122,7 +120,8 @@ public class Interface extends Entity.Base<String, Interface.Data, Interface> {
     public static class Data {
 
         String name;
-        Type type = Type.Unknown;
+        HostDirectory.Interface.Type type =
+            HostDirectory.Interface.Type.Unknown;
         String endpoint;
         byte[] mac;
         int status;

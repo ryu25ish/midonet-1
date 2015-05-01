@@ -74,13 +74,13 @@ import org.midonet.cluster.data.l4lb.LoadBalancer;
 import org.midonet.cluster.data.l4lb.Pool;
 import org.midonet.cluster.data.l4lb.PoolMember;
 import org.midonet.cluster.data.l4lb.VIP;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.cluster.data.ports.BridgePort;
 import org.midonet.cluster.data.ports.VlanMacPort;
 import org.midonet.cluster.data.ports.VxLanPort;
 import org.midonet.cluster.data.rules.TraceRule;
 import org.midonet.midolman.SystemDataProvider;
 import org.midonet.midolman.cluster.zookeeper.ZkConnectionProvider;
-import org.midonet.midolman.host.state.HostDirectory;
 import org.midonet.midolman.host.state.HostZkManager;
 import org.midonet.midolman.rules.RuleList;
 import org.midonet.midolman.serialization.SerializationException;
@@ -95,11 +95,11 @@ import org.midonet.midolman.state.PathBuilder;
 import org.midonet.midolman.state.PoolHealthMonitorMappingStatus;
 import org.midonet.midolman.state.PortConfig;
 import org.midonet.midolman.state.PortConfigCache;
-import org.midonet.midolman.state.PortDirectory;
-import org.midonet.midolman.state.PortDirectory.VxLanPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.VxLanPortConfig;
 import org.midonet.midolman.state.StateAccessException;
 import org.midonet.midolman.state.ZkLeaderElectionWatcher;
 import org.midonet.midolman.state.ZkManager;
+import org.midonet.midolman.state.ZkOpList;
 import org.midonet.midolman.state.ZkUtil;
 import org.midonet.midolman.state.ZookeeperConnectionWatcher;
 import org.midonet.midolman.state.l4lb.LBStatus;
@@ -243,6 +243,12 @@ public class LocalDataClientImpl implements DataClient {
 
     private final static Logger log =
             LoggerFactory.getLogger(LocalDataClientImpl.class);
+
+    private void commitOps(List<Op> ops) throws StateAccessException {
+        ZkOpList opList = new ZkOpList(zkManager);
+        opList.addAll(ops);
+        opList.commit();
+    }
 
     @Override
     public @CheckForNull AdRoute adRoutesGet(UUID id)
@@ -1193,7 +1199,10 @@ public class LocalDataClientImpl implements DataClient {
 
     @Override
     public void hostsDelete(UUID hostId) throws StateAccessException {
-        hostZkManager.deleteHost(hostId);
+
+        List<Op> ops = new ArrayList<>();
+        hostZkManager.prepareDelete(ops, hostId);
+        this.commitOps(ops);
     }
 
     @Override

@@ -46,7 +46,7 @@ import org.midonet.midolman.config.MidolmanConfig
 import org.midonet.midolman.host.interfaces.InterfaceDescription
 import org.midonet.midolman.host.scanner.InterfaceScanner
 import org.midonet.midolman.host.services.HostService.HostIdAlreadyInUseException
-import org.midonet.midolman.host.state.HostDirectory.{Metadata => HostMetadata}
+import org.midonet.cluster.data.midonet.HostDirectory.{Metadata => HostMetadata}
 import org.midonet.midolman.host.state.HostZkManager
 import org.midonet.midolman.host.updater.InterfaceDataUpdater
 import org.midonet.midolman.logging.MidolmanLogging

@@ -35,7 +35,7 @@ import org.midonet.cluster.client.BridgeBuilder;
 import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.state.NoStatePathException;
 import org.midonet.midolman.state.PortConfig;
-import org.midonet.midolman.state.PortDirectory;
+import org.midonet.cluster.data.midonet.PortDirectory;
 import org.midonet.midolman.state.StateAccessException;
 import org.midonet.midolman.state.zkManagers.BridgeZkManager;
 import org.midonet.midolman.state.zkManagers.PortZkManager;

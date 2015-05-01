@@ -26,8 +26,8 @@ import org.apache.zookeeper.Op;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.midonet.cluster.data.Rule.RuleIndexOutOfBoundsException;
 import org.midonet.cluster.data.TraceRequest;
+import org.midonet.cluster.data.BaseConfig;
 import org.midonet.midolman.rules.Rule;
 import org.midonet.midolman.rules.RuleList;
 import org.midonet.midolman.rules.Condition;

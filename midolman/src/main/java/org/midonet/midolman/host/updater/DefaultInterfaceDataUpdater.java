@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 import java.net.InetAddress;
 import java.util.*;
 
-import static org.midonet.midolman.host.state.HostDirectory.Interface;
-import static org.midonet.midolman.host.state.HostDirectory.Metadata;
+import static org.midonet.cluster.data.midonet.HostDirectory.Interface;
+import static org.midonet.cluster.data.midonet.HostDirectory.Metadata;
 
 public class DefaultInterfaceDataUpdater implements InterfaceDataUpdater {
 

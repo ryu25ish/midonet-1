@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.midonet.midolman.host.state;
+package org.midonet.cluster.data.midonet;
 
 import java.net.InetAddress;
 import java.util.Arrays;
@@ -99,7 +99,7 @@ public class HostDirectory {
             if (name != null ? !name.equals(metadata.name) : metadata.name != null)
                 return false;
             if (tunnelZones != null ? !tunnelZones.equals(metadata.tunnelZones)
-                    : metadata.tunnelZones != null)
+                                    : metadata.tunnelZones != null)
                 return false;
 
             return true;
@@ -121,7 +121,7 @@ public class HostDirectory {
     public static class Interface {
 
         public enum Type {
-            Unknown, Physical, Virtual, Tunnel
+            Unknown, Physical, Virtual, Type, Tunnel
         }
 
         public enum StatusType {
@@ -273,16 +273,16 @@ public class HostDirectory {
         @Override
         public String toString() {
             return "Interface{" +
-                "name=" + name +
-                ", type=" + type +
-                ", endpoint='" + endpoint + '\'' +
-                ", mac=" + mac +
-                ", status=" + status +
-                ", mtu=" + mtu +
-                ", addresses=" + (addresses == null ? null : Arrays.asList(
+                   "name=" + name +
+                   ", type=" + type +
+                   ", endpoint='" + endpoint + '\'' +
+                   ", mac=" + mac +
+                   ", status=" + status +
+                   ", mtu=" + mtu +
+                   ", addresses=" + (addresses == null ? null : Arrays.asList(
                 addresses)) +
-                ", properties=" + properties +
-                '}';
+                   ", properties=" + properties +
+                   '}';
         }
 
         // Copy constructor
@@ -336,10 +336,10 @@ public class HostDirectory {
             VirtualPortMapping that = (VirtualPortMapping) o;
 
             if (localDeviceName != null ? !localDeviceName.equals(
-                    that.localDeviceName) : that.localDeviceName != null)
+                that.localDeviceName) : that.localDeviceName != null)
                 return false;
             if (virtualPortId != null ? !virtualPortId.equals(
-                    that.virtualPortId) : that.virtualPortId != null)
+                that.virtualPortId) : that.virtualPortId != null)
                 return false;
 
             return true;
@@ -349,16 +349,16 @@ public class HostDirectory {
         public int hashCode() {
             int result = virtualPortId != null ? virtualPortId.hashCode() : 0;
             result = 31 * result + (localDeviceName != null
-                    ? localDeviceName.hashCode() : 0);
+                                    ? localDeviceName.hashCode() : 0);
             return result;
         }
 
         @Override
         public String toString() {
             return "VirtualPortMapping{" +
-                    "virtualPortId=" + virtualPortId +
-                    ", localDeviceName='" + localDeviceName + '\'' +
-                    '}';
+                   "virtualPortId=" + virtualPortId +
+                   ", localDeviceName='" + localDeviceName + '\'' +
+                   '}';
         }
     }
 }

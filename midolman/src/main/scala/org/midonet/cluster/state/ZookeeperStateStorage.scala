@@ -21,6 +21,7 @@ import javax.annotation.Nonnull
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
+import org.midonet.cluster.data.midonet.PortDirectory
 
 import rx.Observable
 import rx.subjects.PublishSubject
@@ -34,7 +35,7 @@ import org.midonet.midolman.logging.MidolmanLogging
 import org.midonet.midolman.serialization.SerializationException
 import org.midonet.midolman.simulation.Bridge.UntaggedVlanId
 import org.midonet.midolman.state.zkManagers.PortZkManager
-import org.midonet.midolman.state.{PortConfig, PortDirectory, StateAccessException, _}
+import org.midonet.midolman.state.{PortConfig, StateAccessException, _}
 import org.midonet.util.eventloop.Reactor
 import org.midonet.util.functors.makeRunnable
 

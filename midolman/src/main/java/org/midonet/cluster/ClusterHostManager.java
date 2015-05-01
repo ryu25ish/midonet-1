@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 
 import org.midonet.cluster.client.HostBuilder;
 import org.midonet.cluster.data.TunnelZone;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.midolman.cluster.zookeeper.ZkConnectionProvider;
-import org.midonet.midolman.host.state.HostDirectory;
 import org.midonet.midolman.host.state.HostZkManager;
 import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.serialization.Serializer;

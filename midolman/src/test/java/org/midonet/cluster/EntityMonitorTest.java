@@ -51,7 +51,7 @@ import org.midonet.midolman.state.PathBuilder;
 import org.midonet.midolman.state.StateAccessException;
 import org.midonet.midolman.state.ZkManager;
 import org.midonet.midolman.state.ZookeeperConnectionWatcher;
-import org.midonet.midolman.state.zkManagers.BaseConfig;
+import org.midonet.cluster.data.BaseConfig;
 import org.midonet.midolman.version.DataWriteVersion;
 import org.midonet.util.eventloop.MockReactor;
 import org.midonet.util.eventloop.Reactor;

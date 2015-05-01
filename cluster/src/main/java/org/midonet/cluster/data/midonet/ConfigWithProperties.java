@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.midonet.midolman.state.zkManagers;
+package org.midonet.cluster.data.midonet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,8 @@ import java.util.UUID;
 import com.google.common.base.Preconditions;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+
+import org.midonet.cluster.data.BaseConfig;
 
 public abstract class ConfigWithProperties extends BaseConfig {
 

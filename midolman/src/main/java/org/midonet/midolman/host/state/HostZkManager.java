@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import org.midonet.cluster.WatchableZkManager;
 import org.midonet.cluster.data.Converter;
 import org.midonet.cluster.data.Port;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.midolman.serialization.SerializationException;
 import org.midonet.midolman.serialization.Serializer;
 import org.midonet.midolman.state.AbstractZkManager;
@@ -247,19 +248,14 @@ public class HostZkManager
         return !portChildren.isEmpty();
     }
 
-    public void deleteHost(UUID id) throws StateAccessException {
-        zk.multi(prepareDelete(id));
-    }
-
-    public List<Op> prepareDelete(UUID id) throws StateAccessException {
-
-        List<Op> ops = new ArrayList<>();
+    public void prepareDelete(List<Op> ops, UUID id)
+        throws StateAccessException {
 
         Collection<UUID> tunnelZones = getTunnelZoneIds(id, null);
         for (UUID zoneId : tunnelZones) {
             ops.addAll(zk.getDeleteOps(
-                    paths.getHostTunnelZonePath(id, zoneId),
-                    paths.getTunnelZoneMembershipPath(zoneId, id)));
+                paths.getHostTunnelZonePath(id, zoneId),
+                paths.getTunnelZoneMembershipPath(zoneId, id)));
         }
 
         if (zk.exists(paths.getHostFloodingProxyWeightPath(id))) {
@@ -268,14 +264,12 @@ public class HostZkManager
         }
 
         ops.addAll(zk.getDeleteOps(
-                paths.getHostInterfacesPath(id),
-                paths.getHostVrnPortMappingsPath(id),
-                paths.getHostVrnDatapathMappingPath(id),
-                paths.getHostVrnMappingsPath(id),
-                paths.getHostTunnelZonesPath(id),
-                paths.getHostPath(id)));
-
-        return ops;
+            paths.getHostInterfacesPath(id),
+            paths.getHostVrnPortMappingsPath(id),
+            paths.getHostVrnDatapathMappingPath(id),
+            paths.getHostVrnMappingsPath(id),
+            paths.getHostTunnelZonesPath(id),
+            paths.getHostPath(id)));
     }
 
     public List<UUID> getHostIds() throws StateAccessException {

@@ -17,7 +17,7 @@ package org.midonet.api.host;
 
 import org.midonet.api.ResourceUriBuilder;
 import org.midonet.api.UriResource;
-import org.midonet.midolman.host.state.HostDirectory;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.packets.MAC;
 
 import javax.xml.bind.annotation.XmlRootElement;

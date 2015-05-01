@@ -18,7 +18,8 @@ package org.midonet.cluster.data;
 /**
  * A common interface representing an entity in the cluster data model.
  */
-public interface Entity<Id, Data, Self extends Entity<Id, Data, Self>> {
+public interface
+    Entity<Id, Data, Self extends Entity<Id, Data, Self>> {
 
     public Id getId();
 

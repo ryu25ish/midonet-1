@@ -19,6 +19,8 @@ import java.util.UUID
 
 import javax.annotation.concurrent.Immutable
 
+import org.midonet.cluster.data.midonet.PortDirectory
+
 import scala.collection.JavaConverters._
 
 import com.google.protobuf.MessageOrBuilder
@@ -30,7 +32,7 @@ import org.midonet.cluster.util.IPSubnetUtil.{Converter => IPSubnetConverter}
 import org.midonet.cluster.util.MACUtil.{Converter => MACConverter}
 import org.midonet.cluster.util.UUIDUtil.{Converter => UUIDConverter}
 import org.midonet.midolman.state.PortConfig
-import org.midonet.midolman.state.PortDirectory.{BridgePortConfig, RouterPortConfig, VxLanPortConfig}
+import PortDirectory.{BridgePortConfig, RouterPortConfig, VxLanPortConfig}
 import org.midonet.midolman.topology.VirtualTopology.VirtualDevice
 import org.midonet.packets.{IPv4Addr, IPv4Subnet, MAC}
 import org.midonet.sdn.flows.FlowTagger

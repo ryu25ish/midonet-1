@@ -22,7 +22,7 @@ import org.midonet.cluster.DataClient;
 import org.midonet.cluster.EntityIdSetMonitor;
 import org.midonet.cluster.EntityMonitor;
 import org.midonet.cluster.data.host.Host;
-import org.midonet.midolman.host.state.HostDirectory;
+import org.midonet.cluster.data.midonet.HostDirectory;
 import org.midonet.midolman.state.StateAccessException;
 import org.midonet.midolman.state.ZookeeperConnectionWatcher;
 

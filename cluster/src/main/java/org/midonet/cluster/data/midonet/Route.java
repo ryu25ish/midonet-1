@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Midokura SARL
+ * Copyright 2015 Midokura SARL
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package org.midonet.midolman.layer3;
+package org.midonet.cluster.data.midonet;
 
-import com.google.common.base.Objects;
 import java.io.Serializable;
 import java.util.UUID;
+
+import com.google.common.base.Objects;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
@@ -55,9 +56,10 @@ public class Route implements Serializable {
     public boolean learned = false;
 
     public Route(int srcNetworkAddr, int srcNetworkLength, int dstNetworkAddr,
-            int dstNetworkLength, NextHop nextHop, UUID nextHopPort,
-            int nextHopGateway, int weight, String attributes, UUID routerId,
-            boolean learned) {
+                 int dstNetworkLength, NextHop nextHop, UUID nextHopPort,
+                 int nextHopGateway, int weight, String attributes,
+                 UUID routerId,
+                 boolean learned) {
         super();
         this.srcNetworkAddr = srcNetworkAddr;
         this.srcNetworkLength = srcNetworkLength;
@@ -74,7 +76,8 @@ public class Route implements Serializable {
 
     public Route(int srcNetworkAddr, int srcNetworkLength, int dstNetworkAddr,
                  int dstNetworkLength, NextHop nextHop, UUID nextHopPort,
-                 int nextHopGateway, int weight, String attributes, UUID routerId) {
+                 int nextHopGateway, int weight, String attributes,
+                 UUID routerId) {
         this(srcNetworkAddr, srcNetworkLength, dstNetworkAddr, dstNetworkLength,
                 nextHop, nextHopPort, nextHopGateway, weight, attributes, routerId, false);
     }

@@ -16,24 +16,20 @@
 
 package org.midonet.midolman.state;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.midonet.midolman.state.PortDirectory.BridgePortConfig;
-import org.midonet.midolman.state.PortDirectory.InteriorBridgePortConfig;
-import org.midonet.midolman.state.PortDirectory.ExteriorBridgePortConfig;
-import org.midonet.midolman.state.PortDirectory.RouterPortConfig;
-import org.midonet.midolman.state.PortDirectory.InteriorRouterPortConfig;
-import org.midonet.midolman.state.PortDirectory.ExteriorRouterPortConfig;
-import org.midonet.midolman.state.PortDirectory.VxLanPortConfig;
-import org.midonet.midolman.state.zkManagers.BaseConfig;
-import org.midonet.midolman.state.zkManagers.ConfigWithProperties;
-import org.midonet.packets.IPSubnet;
+import org.midonet.cluster.data.midonet.PortDirectory.BridgePortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.InteriorBridgePortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.ExteriorBridgePortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.RouterPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.InteriorRouterPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.ExteriorRouterPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.VxLanPortConfig;
+import org.midonet.cluster.data.midonet.ConfigWithProperties;
 import org.midonet.packets.IPv4Subnet;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY,

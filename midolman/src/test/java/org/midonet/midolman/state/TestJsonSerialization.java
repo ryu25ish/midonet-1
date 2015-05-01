@@ -20,8 +20,8 @@ import java.util.UUID;
 
 import org.junit.Test;
 
-import org.midonet.midolman.state.PortDirectory.BridgePortConfig;
-import org.midonet.midolman.state.PortDirectory.RouterPortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.BridgePortConfig;
+import org.midonet.cluster.data.midonet.PortDirectory.RouterPortConfig;
 import org.midonet.midolman.state.zkManagers.BridgeDhcpZkManager.Host;
 import org.midonet.midolman.cluster.serialization.JsonVersionZkSerializer;
 import org.midonet.packets.IPv4Addr;
